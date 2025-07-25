@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
 - 🏙️ Explore various Indian cities like Ajmer, Delhi, Sikar, and more
 - 📍 “Explore” button redirects to the city on Google Maps
