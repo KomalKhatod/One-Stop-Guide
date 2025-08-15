@@ -21,7 +21,7 @@
     }
     nav {
       background-color: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(13, 235, 87, 0.1);
       padding: 15px 30px;
       display: flex;
       justify-content: space-between;
@@ -38,18 +38,193 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #333;
+      color: #e37907d2;
       font-weight: 600;
     }
-    header {
+   /* Header Styles */
+   .main-header {
       text-align: center;
-      padding: 30px 0;
-      animation: fadeInDown 1s ease;
+      margin: 2rem 0;
     }
-    header h1 {
-      font-size: 3rem;
-      color: #a0a8bf;
+    
+    .main-header h1 {
+      color: #e67e22; /* Orange color */
+      font-size: 2.5rem;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      position: relative;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
+    
+    .main-header h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 3px;
+      background: #e67e22;
+      border-radius: 3px;
+    }
+
+
+header {
+  background: var(--primary-bg);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 0.5rem 2rem;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-brand h2 {
+  color: var(--accent);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover, 
+.nav-links a.active {
+  background: var(--accent);
+  color: var(--primary-bg);
+}
+
+/* Dropdown Menu */
+.dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+      padding: 10px 0;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .dropdown-menu li {
+      padding: 8px 15px;
+    }
+    
+    .dropdown-menu a {
+      color: #333;
+      display: block;
+      transition: all 0.2s;
+    }
+    
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+      padding-left: 20px;
+    }
+
+/* Mobile Menu */
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: var(--text-main);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: var(--secondary-bg);
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    transition: all 0.5s ease;
+  }
+  
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .dropdown-menu {
+    position: static;
+    display: none;
+    width: 80%;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .hamburger {
+    display: block;
+  }
+  
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
 
     @keyframes fadeInDown {
       from { opacity: 0; transform: translateY(-30px); }
@@ -59,6 +234,8 @@
       from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
     }
+
+    
     .city-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -217,19 +394,102 @@
 </head>
 <body>
 
-  <nav>
-    <h2>One Stop Guide</h2>
-    <ul>
-      <li><a href="#">Home</a></li>
+  <header>
+  <nav class="main-nav">
+    <div class="nav-brand">
+      <h2>One Stop Guide</h2>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li class="dropdown">
+       <!-- Cities Button -->
+<li class="dropdown">
+  <button class="dropbtn" onclick="toggleDropdown()">Cities ▾</button>
+  <div id="citiesDropdown" class="dropdown-content">
+    <a href="ajmer.html">Ajmer</a>
+    <a href="sikar.html">Sikar</a>
+    <a href="kishangarh.html">Kishangarh</a>
+    <a href="laxmangarh.html">Laxmangarh</a>
+    <a href="kota.html">Kota</a>
+    <a href="delhi.html">Delhi</a>
+    <a href="fatehpur.html">Fatehpur</a>
+    <a href="ratangarh.html">Ratangarh</a>
+    <a href="burdwan.html">Burdwan</a>
+    <a href="kolkata.html">Kolkata</a>
+    <a href="aligarh.html">Aligarh</a>
+    <a href="pune.html">Pune</a>
+    <a href="jaipur.html">Jaipur</a>
+  </div>
+</li>
+
+<style>
+/* Dropdown styling */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}
+</style>
+
+<script>
+function toggleDropdown() {
+  document.getElementById("citiesDropdown").classList.toggle("show");
+}
+
+// Close dropdown if clicked outside
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    document.querySelectorAll(".dropdown-content").forEach(dd => dd.classList.remove('show'));
+  }
+}
+</script>
+
+      </li>
       <li><a href="#">Jobs</a></li>
       <li><a href="#">Contact</a></li>
       <li><a href="#">About</a></li>
     </ul>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </nav>
-
-  <header>
+</header>
+<div class="main-header">
     <h1>Explore Your Favourite Cities</h1>
-  </header>
+  </div>
+  
 
   <div class="city-grid">
     <!-- Repeatable City Cards -->
@@ -250,6 +510,35 @@
   <p>Sikar is famous for its historic forts and education hubs.</p>
   <div class="special-content">Visit Biyani College and Radhakishan Mandir.</div>
   <button class="explore-btn" onclick="openMap('Sikar')">
+    <i class="fas fa-map-marker-alt"></i> Explore
+  </button>
+</div>
+<div class="city-card">
+  <img src="Kolkata.webp" alt="Kolkata" />
+  <h2>Kolkata</h2>
+  <p>Kolkata is known as the cultural capital of India, famous for its colonial architecture and festivals.</p>
+  <div class="special-content">Visit Howrah Bridge and Victoria Memorial.</div>
+  <button class="explore-btn" onclick="openMap('Kolkata')">
+    <i class="fas fa-map-marker-alt"></i> Explore
+  </button>
+</div>
+
+<div class="city-card">
+  <img src="Burdwan.jpg" alt="Burdwan" />
+  <h2>Burdwan</h2>
+  <p>Burdwan is known for its rich history, temples, and agricultural significance.</p>
+  <div class="special-content">Visit Curzon Gate and 108 Shiva Temples.</div>
+  <button class="explore-btn" onclick="openMap('Burdwan')">
+    <i class="fas fa-map-marker-alt"></i> Explore
+  </button>
+</div>
+
+<div class="city-card">
+  <img src="Aligarh.webp" alt="Aligarh" />
+  <h2>Aligarh</h2>
+  <p>Aligarh is famous for its lock industry and prestigious Aligarh Muslim University.</p>
+  <div class="special-content">Visit Aligarh Fort and Jama Masjid.</div>
+  <button class="explore-btn" onclick="openMap('Aligarh')">
     <i class="fas fa-map-marker-alt"></i> Explore
   </button>
 </div>
@@ -356,6 +645,9 @@
     <li><a href="fatehpur.html" target="_blank">Fatehpur</a></li>
     <li><a href="jaipur.html" target="_blank">Jaipur</a></li>
     <li><a href="pune.html" target="_blank">Pune</a></li>
+    <li><a href="aligarh.html">Aligarh</a></li>
+    <li><a href="burdman.html">Burdman</a></li>
+     <li><a href="kolkata.html" >Kolkata</a></li>
   </ul>
 </div>
 
@@ -384,6 +676,35 @@
   </footer>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+      
+      // Toggle mobile menu
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+      });
+      
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          hamburger.classList.remove('active');
+        });
+      });
+      
+      // Make dropdown work on mobile
+      const dropdown = document.querySelector('.dropdown');
+      const dropdownMenu = document.querySelector('.dropdown-menu');
+      
+      dropdown.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        }
+      });
+    });
     function openMap(city) {
       const mapUrl = `https://www.google.com/maps/search/${city}+Rajasthan`;
       window.open(mapUrl, "_blank");
